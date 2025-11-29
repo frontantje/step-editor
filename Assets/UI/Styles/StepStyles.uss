@@ -1,0 +1,120 @@
+
+:root {
+    /* Colors */
+    --color-primary: #52a3a3; /* Teal/Aqua color for actions */
+    --color-background: #2a2a2a; /* Dark gray background */
+    --color-text-light: #f0f0f0; /* Light text */
+    --color-border: #444444; /* Subtle border color */
+
+    /* Spacing & Sizes */
+    --spacing-default: 10px;
+    --spacing-half: 5px;
+    --border-radius: 4px;
+}
+
+
+/* === Global Container Styling === */
+.editor-container {
+    background-color: var(--color-background);
+    flex-grow: 1; /* Requirement: UI must scale with the parent */
+    padding: var(--spacing-default);
+}
+
+.header-title {
+    color: var(--color-primary);
+    font-size: 24px;
+    -unity-font-style: bold;
+    margin-bottom: var(--spacing-default);
+    -unity-text-align: middle-left;
+}
+
+
+/* === List Area Styling === */
+.list-area-container {
+    flex-grow: 1; /* Take up all available vertical space */
+    border-width: 1px;
+    border-color: var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-half);
+    margin-bottom: var(--spacing-default);
+}
+
+.step-list-view {
+    flex-grow: 1; /* Crucial for scaling the list itself */
+    background-color: #333333; /* Slightly lighter than background */
+}
+
+
+/* === Controls and Buttons === */
+.controls-container {
+    /* Simple layout for buttons */
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.action-button {
+    flex-grow: 1;
+    height: 30px;
+    margin: var(--spacing-half);
+    border-radius: var(--border-radius);
+    color: var(--color-text-light);
+    background-color: var(--color-border); /* Default button style */
+}
+
+/* Primary style override for the Add button */
+.action-button.primary {
+    background-color: var(--color-primary);
+    -unity-font-style: bold;
+}
+
+.step-item {
+    flex-direction: row; /* Layout elements horizontally */
+    align-items: center; /* Center items vertically */
+    height: 40px; /* Fixed height for consistent list look */
+    margin-bottom: var(--spacing-half);
+    background-color: #404040; /* Item background */
+    border-radius: var(--border-radius);
+    padding-right: var(--spacing-half);
+}
+
+.drag-handle {
+    width: 25px;
+    height: 100%;
+    background-color: var(--color-border);
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+    -unity-text-align: middle-center;
+    font-size: 18px;
+    color: var(--color-text-light);
+}
+
+.item-content-area {
+    flex-grow: 1; /* Take up all remaining space */
+    flex-direction: row;
+    align-items: center;
+    padding-left: var(--spacing-default);
+}
+
+.action-label {
+    flex-grow: 1;
+    color: var(--color-text-light);
+    margin-right: var(--spacing-default);
+}
+
+.value-input {
+    width: 60px;
+    margin-right: var(--spacing-default);
+}
+
+.remove-button {
+    width: 30px;
+    height: 30px;
+    background-color: #a35252; /* Reddish color for danger/remove */
+    color: var(--color-text-light);
+    -unity-font-style: bold;
+}
+
+/* === Optional: Feedback States (Hover/Active) === */
+.step-item:hover {
+    background-color: #505050;
+}
