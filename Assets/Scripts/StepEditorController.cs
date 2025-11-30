@@ -5,11 +5,6 @@ using System.IO;
 using UnityEngine.Serialization;
 public class StepEditorController : MonoBehaviour
 {
-    [FormerlySerializedAs("stepEditorUXML")]
-    [Tooltip("The UXML document linked to the UIDocument component.")]
-    [SerializeField] private VisualTreeAsset stepEditorUxml;
-    
-    [FormerlySerializedAs("stepListItemUXML")]
     [Tooltip("The UXML template for a single list item.")]
     [SerializeField] private VisualTreeAsset stepListItemUxml;
     
@@ -35,7 +30,7 @@ public class StepEditorController : MonoBehaviour
     private const string SaveFileName = "StepSequence.json";
     private string _savePath;
 
-    private void OnEnable()
+    private void Start()
     {
         var uiDocument = GetComponent<UIDocument>();
         if (uiDocument == null) return;
