@@ -6,7 +6,7 @@
 
         <ui:VisualElement name="list-area" class="list-area-container">
             
-            <ui:ListView name="step-list" class="step-list-view" />
+            <ui:ListView name="step-list" class="step-list-view" reorder-mode="Animated" reorderable="true" fixed-item-height="50" />
 
         </ui:VisualElement>
 

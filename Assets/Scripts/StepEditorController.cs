@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine.Serialization;
 public class StepEditorController : MonoBehaviour
 {
     [Tooltip("The UXML template for a single list item.")]
@@ -24,14 +23,15 @@ public class StepEditorController : MonoBehaviour
     private Button _addStepButton;
 
     // Data Model
-    private List<StepData> _stepSequence = new();
+    private List<StepData> _stepSequence;
     
     // Data Persistency
     private const string SaveFileName = "StepSequence.json";
     private string _savePath;
 
-    private void Start()
+    private void Awake()
     {
+        _stepSequence = new List<StepData>();
         var uiDocument = GetComponent<UIDocument>();
         if (uiDocument == null) return;
         var root = uiDocument.rootVisualElement;
@@ -104,8 +104,6 @@ public class StepEditorController : MonoBehaviour
     private void SetupListView()
     {
         _stepListView.itemsSource = _stepSequence;
-        _stepListView.reorderable = true;
-        _stepListView.fixedItemHeight = 40; // Matches the height set in USS for .step-item
         _stepListView.makeItem = () =>
         {
             // Instantiate template

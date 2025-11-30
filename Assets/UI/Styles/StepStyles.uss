@@ -40,7 +40,6 @@
 }
 
 .step-list-view {
-    flex-grow: 1; /* Crucial for scaling the list itself */
     background-color: #333333; /* Slightly lighter than background */
 }
 
@@ -75,6 +74,7 @@
     background-color: #404040; /* Item background */
     border-radius: var(--border-radius);
     padding-right: var(--spacing-half);
+    transition: all 0.15s ease-out;
 }
 
 .drag-handle {
@@ -86,6 +86,10 @@
     -unity-text-align: middle-center;
     font-size: 18px;
     color: var(--color-text-light);
+}
+drag-handle:hover {
+    background-color: var(--color-primary);
+    cursor: move-arrow;
 }
 
 .item-content-area {
