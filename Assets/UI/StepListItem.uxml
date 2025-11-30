@@ -1,17 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    
+    <ui:Style src="Styles/StepStyles.uss"/>
     <ui:VisualElement name="step-item-root" class="step-item">
-
         <ui:VisualElement name="drag-handle" class="drag-handle">
-            <ui:Label text=":::" /> </ui:VisualElement>
-
+            <ui:Label text=":::" />
+        </ui:VisualElement>
         <ui:VisualElement name="content-area" class="item-content-area">
             <ui:Label name="action-label" text="Action Name Placeholder" class="action-label" />
-            <ui:TextField name="value-field" class="value-input" value="1.0" />
+            <ui:TextField name="value-field" value="1.0" class="value-input" />
         </ui:VisualElement>
-
         <ui:Button name="remove-button" text="X" class="remove-button" />
-
     </ui:VisualElement>
-
 </ui:UXML>

@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-
+    <ui:Style src="Styles/StepStyles.uss"/>
     <ui:VisualElement name="root" class="editor-container">
 
         <ui:Label text="Sequence Step Editor" class="header-title" />
