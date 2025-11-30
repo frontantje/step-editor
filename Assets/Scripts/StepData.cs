@@ -1,3 +1,4 @@
+[System.Serializable]
 public class StepData
 {
     public string ActionName { get; set; }
