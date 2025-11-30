@@ -1,8 +1,8 @@
 [System.Serializable]
 public class StepData
 {
-    public string ActionName { get; set; }
-    public float Value { get; set; }
+    public string ActionName;
+    public float Value;
 
     public StepData(string name, float val)
     {

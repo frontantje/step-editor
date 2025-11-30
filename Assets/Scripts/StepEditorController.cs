@@ -90,7 +90,6 @@ public class StepEditorController : MonoBehaviour
         try
         {
             File.WriteAllText(_savePath, json);
-            Debug.Log($"Saved {_stepSequence.Count} steps to {_savePath}");
         }
         catch (System.Exception e)
         {
@@ -116,6 +115,8 @@ public class StepEditorController : MonoBehaviour
         {
             // Instantiate template
             VisualElement itemRoot = stepListItemUxml.Instantiate();
+            Button removeButton = itemRoot.Q<Button>("remove-button");
+            removeButton.clicked += () => OnRemoveButtonClicked(itemRoot);
             return itemRoot;
         };
 
@@ -124,20 +125,19 @@ public class StepEditorController : MonoBehaviour
         {
             StepData data = _stepSequence[index];
             TextField valueField = visualElement.Q<TextField>("value-field");
-            Button removeButton = visualElement.Q<Button>("remove-button");
+            TextField titleField = visualElement.Q<TextField>("action-title");
     
-            // Wire up UI elements
-            visualElement.Q<Label>("action-label").text = data.ActionName;
+            // 1. Data binding (clean)
+            titleField.value = data.ActionName;
             valueField.value = data.Value.ToString("F1");
     
-            // Register/Unregister Value Changed
-            valueField.UnregisterValueChangedCallback(OnValueFieldChanged);
-            valueField.RegisterValueChangedCallback(OnValueFieldChanged);
-    
-            removeButton.clicked -= () => OnRemoveButtonClicked(visualElement); 
-            removeButton.clicked += () => OnRemoveButtonClicked(visualElement);
-    
-            // Store data model
+            // 2. Register/Unregister Value Changed (Necessary for data input)
+            titleField.UnregisterValueChangedCallback(OnFieldValueChanged);
+            valueField.UnregisterValueChangedCallback(OnFieldValueChanged);
+            titleField.RegisterValueChangedCallback(OnFieldValueChanged);
+            valueField.RegisterValueChangedCallback(OnFieldValueChanged);
+
+            // 3. Store data model (Necessary for retrieving data in OnRemoveButtonClicked and OnFieldValueChanged)
             visualElement.userData = data;
         };
         _stepListView.itemIndexChanged += OnStepSequenceReordered;
@@ -160,23 +160,32 @@ public class StepEditorController : MonoBehaviour
         }
     }
 
-    private void OnValueFieldChanged(ChangeEvent<string> evt)
+    private void OnFieldValueChanged(ChangeEvent<string> evt)
     {
         if (evt.target is TextField changedField)
         {
-            VisualElement itemRoot = changedField.parent.parent; 
-            // Retrieve data model
-            StepData data = itemRoot.userData as StepData;
-            if (data == null) return;
-            // Parse and update
-            if (float.TryParse(evt.newValue, out float newValue))
+            object retrievedData = changedField.FindAncestorUserData(); 
+            if (retrievedData is StepData data)
             {
-                data.Value = newValue; 
-                SaveStepSequence();   
+                if (changedField.name == "value-field")
+                {
+                    if (float.TryParse(evt.newValue, out float newValue))
+                    {
+                        data.Value = newValue; 
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else if (changedField.name == "action-title") 
+                {
+                    data.ActionName = evt.newValue;
+                }
             }
+            SaveStepSequence();   
         }
     }
-
     private void OnAddStepClicked()
     {
         _stepSequence.Add(new StepData("New Action", 0.0f));

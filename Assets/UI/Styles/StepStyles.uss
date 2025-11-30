@@ -95,10 +95,10 @@
     padding-left: var(--spacing-default);
 }
 
-.action-label {
+.action-title {
     flex-grow: 1;
-    color: var(--color-text-light);
     margin-right: var(--spacing-default);
+    color: var(--color-primary);
 }
 
 .value-input {
