@@ -94,7 +94,6 @@ public class StepEditorController : MonoBehaviour
 
     private void InitializeStepData()
     {
-        Debug.Log("Loading fallback data");
         // Add a few initial steps to start the editor with content
         _stepSequence.Add(new StepData("Initial Move", 10.0f));
         _stepSequence.Add(new StepData("Wait", 2.5f));

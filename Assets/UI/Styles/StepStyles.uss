@@ -1,22 +1,64 @@
 
 :root {
-    /* Colors */
-    --color-primary: #52a3a3; /* Teal/Aqua color for actions */
-    --color-background: #2a2a2a; /* Dark gray background */
-    --color-text-light: #f0f0f0; /* Light text */
-    --color-border: #444444; /* Subtle border color */
+    /*colors*/
+    --color-primary: #52a3a3;
+    --color-background: #2a2a2a;
+    --color-text-light: #f0f0f0;
+    --color-border: #444444;
+    --color-item-background: #404040;
+    --color-highlight: #488f8f;
+    --color-selected: #65baba;
+    --color-input-focus: #1a5050;
+    --color-danger: #a35252;
 
     /* Spacing & Sizes */
     --spacing-default: 10px;
     --spacing-half: 5px;
-    --border-radius: 4px;
+    --border-radius: 10px;
+}
+
+/*override default unity styles*/
+.unity-base-text-field {
+    background-color: var(--color-item-background);
+    border-radius: var(--border-radius);
+}
+.unity-base-text-field:focus {
+    border-color: var(--color-selected);
+    border-width: 1px;
+}
+.unity-base-field__input:focus {
+    background-color: var(--color-input-focus);
+}
+.unity-base-text-field__input {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+}
+.unity-list-view__reorderable-item__container {
+    padding-left: 0;
+}
+.unity-list-view__reorderable-handle {
+    display: none;
+}
+.unity-list-view__item {
+    height: 75px;
+    min-height: 75px;
+    padding: 0;
+    margin-bottom: var(--spacing-half);
+}
+.unity-list-view__item:hover, .unity-list-view__item:focus, .unity-collection-view__item--selected{
+    background-color: transparent;
+}
+.unity-scroll-view__content-container {
+    flex-grow: 1;
+    margin-left: var(--spacing-default);
+    padding-bottom: var(--spacing-half);
 }
 
 
-/* === Global Container Styling === */
+/*container*/
 .editor-container {
     background-color: var(--color-background);
-    flex-grow: 1; /* Requirement: UI must scale with the parent */
+    flex-grow: 1; 
     padding: var(--spacing-default);
 }
 
@@ -28,68 +70,52 @@
     -unity-text-align: middle-left;
 }
 
-
-/* === List Area Styling === */
+/*list area*/
 .list-area-container {
     flex-grow: 1; /* Take up all available vertical space */
     border-width: 1px;
     border-color: var(--color-border);
     border-radius: var(--border-radius);
-    padding: var(--spacing-half);
-    margin-bottom: var(--spacing-default);
 }
 
 .step-list-view {
     background-color: #333333; /* Slightly lighter than background */
+    flex-grow: 1;
+    padding-top: var(--spacing-half);
 }
 
-
-/* === Controls and Buttons === */
+/*controls and buttons*/
 .controls-container {
-    /* Simple layout for buttons */
     flex-direction: row;
     justify-content: space-around;
 }
 
 .action-button {
+    margin-top: var(--spacing-default);
+    font-size: 24px;
     flex-grow: 1;
-    height: 30px;
-    margin: var(--spacing-half);
+    height: 45px;
     border-radius: var(--border-radius);
     color: var(--color-text-light);
     background-color: var(--color-border); /* Default button style */
 }
 
-/* Primary style override for the Add button */
 .action-button.primary {
     background-color: var(--color-primary);
     -unity-font-style: bold;
 }
 
+/*list items*/
 .step-item {
     flex-direction: row; /* Layout elements horizontally */
     align-items: center; /* Center items vertically */
-    height: 40px; /* Fixed height for consistent list look */
-    margin-bottom: var(--spacing-half);
-    background-color: #404040; /* Item background */
+    height: 75px; /* Fixed height for consistent list look */
+    background-color: var(--color-item-background);
     border-radius: var(--border-radius);
-    padding-right: var(--spacing-half);
-    transition: all 0.15s ease-out;
-}
-
-.drag-handle {
-    width: 25px;
-    height: 100%;
-    background-color: var(--color-border);
-    border-top-left-radius: var(--border-radius);
-    border-bottom-left-radius: var(--border-radius);
-    -unity-text-align: middle-center;
-    font-size: 18px;
-    color: var(--color-text-light);
-}
-drag-handle:hover {
-    background-color: var(--color-primary);
     cursor: move-arrow;
+}
+.step-item:hover {
+    background-color: var(--color-highlight);
 }
 
 .item-content-area {
@@ -99,26 +125,27 @@ drag-handle:hover {
     padding-left: var(--spacing-default);
 }
 
+.action-title, .value-input {
+    color: var(--color-text-light);
+    margin-right: var(--spacing-default);
+    background-color: var(--color-item-background);
+}
+
 .action-title {
     flex-grow: 1;
-    margin-right: var(--spacing-default);
-    color: var(--color-primary);
 }
 
 .value-input {
     width: 60px;
-    margin-right: var(--spacing-default);
 }
 
 .remove-button {
     width: 30px;
     height: 30px;
-    background-color: #a35252; /* Reddish color for danger/remove */
+    background-color: var(--color-danger);
     color: var(--color-text-light);
     -unity-font-style: bold;
-}
+    border-radius: var(--border-radius);
+    margin-right: var(--spacing-default);
 
-/* === Optional: Feedback States (Hover/Active) === */
-.step-item:hover {
-    background-color: #505050;
 }
